@@ -19,7 +19,7 @@
 })('test', function(BbDock, should) {
 	'use strict';
 
-	describe('BbDock base', function () {
+	describe('BbDock collection', function () {
 		beforeEach(function (done) {
 			done();
 		});

@@ -1,0 +1,112 @@
+{
+    "project": {
+        "name": "bb-dock",
+        "version": "0.0.0"
+    },
+    "files": {
+        "src/index.js": {
+            "name": "src/index.js",
+            "modules": {
+                "$el.dock": 1
+            },
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        }
+    },
+    "modules": {
+        "bb-dock": {
+            "name": "bb-dock",
+            "submodules": {
+                "$el.dock": 1
+            },
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "$el.dock": {
+            "name": "$el.dock",
+            "submodules": {},
+            "classes": {},
+            "fors": {},
+            "is_submodule": 1,
+            "namespaces": {},
+            "module": "bb-dock",
+            "namespace": "",
+            "file": "src/index.js",
+            "line": 5
+        }
+    },
+    "classes": {},
+    "classitems": [
+        {
+            "file": "src/index.js",
+            "line": 21,
+            "description": "The constructor for the dock object.",
+            "itemtype": "method",
+            "name": "dock",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "options",
+                    "description": ""
+                },
+                {
+                    "name": "attachment",
+                    "description": "\n        Optionally provide a attachment that will initially fill the $el.",
+                    "type": "Object",
+                    "optional": true
+                }
+            ],
+            "class": "",
+            "module": "bb-dock",
+            "submodule": "$el.dock"
+        },
+        {
+            "file": "src/index.js",
+            "line": 42,
+            "itemtype": "method",
+            "name": "invoke",
+            "params": [
+                {
+                    "name": "method",
+                    "description": ""
+                },
+                {
+                    "name": "arguments",
+                    "description": "",
+                    "optional": true
+                }
+            ],
+            "class": "",
+            "module": "bb-dock",
+            "submodule": "$el.dock"
+        },
+        {
+            "file": "src/index.js",
+            "line": 72,
+            "class": "",
+            "module": "bb-dock",
+            "submodule": "$el.dock"
+        },
+        {
+            "file": "src/index.js",
+            "line": 93,
+            "itemtype": "method",
+            "name": "detach",
+            "class": "",
+            "module": "bb-dock",
+            "submodule": "$el.dock"
+        }
+    ],
+    "warnings": [
+        {
+            "message": "replacing incorrect tag: params with param",
+            "line": " src/index.js:42"
+        },
+        {
+            "message": "Missing item type",
+            "line": " src/index.js:72"
+        }
+    ]
+}
