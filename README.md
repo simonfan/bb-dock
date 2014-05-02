@@ -1,0 +1,3 @@
+# bb-dock[![Build Status](https://secure.travis-ci.org/simonfan/bb-dock.png?branch=master)](http://travis-ci.org/simonfan/bb-dock)
+
+Some module...
