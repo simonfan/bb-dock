@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>$el.dock - bb-dock</title>
+    <title>src/__bb-dock/base.js - bb-dock</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -84,37 +84,92 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>$el.dock Module</h1>
-<div class="box clearfix meta">
-    
+                        <h1 class="file-heading">File: src/__bb-dock/base.js</h1>
 
-    
+<div class="file">
+    <pre class="code prettyprint linenums">
+//     bb-dock
+//     (c) simonfan
+//     bb-dock is licensed under the MIT terms.
 
-    
-        <div class="foundat">
-            Defined in: <a href="../files/src___bb-dock_base.js.html#l5"><code>src&#x2F;__bb-dock&#x2F;base.js:5</code></a>
-        </div>
-    
+/**
+ * @module bb-dock
+ * @submodule $el.dock
+ */
 
-    
-</div>
+/* jshint ignore:start */
+if (typeof define !== &#x27;function&#x27;) { var define = require(&#x27;amdefine&#x27;)(module) }
+/* jshint ignore:end */
+
+define(function (require, exports, module) {
+	&#x27;use strict&#x27;;
+
+	var dock     = require(&#x27;dock&#x27;),
+		Backbone = require(&#x27;backbone&#x27;);
 
 
 
-<div class="box intro">
-    
-</div>
+
+	/**
+	 * The base dock constructor for backbone data stuff.
+	 * Deals with attaching and detaching.
+	 *
+	 * @param  {[type]} model        [description]
+	 * @param  {[type]} options)     {						this.listenTo(model, &#x27;all&#x27;,             this.trigger);						if (!options                         ||              !options.silent) {				this.trigger(&#x27;attach&#x27;, model,           options);			}		}           [description]
+	 * @param  {[type]} afterDetach: function                     afterDetach(model, options)               {						this.stopListening(model, &#x27;all&#x27;);						if (!options        ||                           !options.silent) {				this.trigger(&#x27;detach&#x27;, model,        options [description]
+	 * @return {[type]}              [description]
+	 */
+	var bbDock = module.exports = dock.extend({
+
+		/**
+		 * Immediately after the item (model/collection) is attached,
+		 * let dock listen to the &#x27;all&#x27; event
+		 * and trigger events.
+		 *
+		 * @method afterAttach
+		 * @param  {[type]} item   [description]
+		 * @param  {[type]} options [description]
+		 * @return {[type]}         [description]
+		 */
+		afterAttach: function afterAttach(item, options) {
+
+			// trigger events on all events of the item.
+			this.listenTo(item, &#x27;all&#x27;, this.trigger);
+
+			// trigger attach event.
+			if (!options || !options.silent) {
+				this.trigger(&#x27;attach&#x27;, item, options);
+			}
+
+		},
+
+		/**
+		 * Immediately after the item (model/collection) is detached,
+		 * stop listening to the &#x27;all&#x27; event.
+		 *
+		 * @method afterDetach
+		 * @param  {[type]} item    [description]
+		 * @param  {[type]} options [description]
+		 * @return {[type]}         [description]
+		 */
+		afterDetach: function afterDetach(item, options) {
+			// remove event listeners
+			this.stopListening(item, &#x27;all&#x27;);
 
 
+			// trigger detach event.
+			if (!options || !options.silent) {
+				this.trigger(&#x27;detach&#x27;, item, options);
+			}
 
-<div class="yui3-g">
-    <div class="yui3-u-1-2">
-        
-    </div>
+		},
+	});
 
-    <div class="yui3-u-1-2">
-        
-    </div>
+	// events
+	bbDock.assignProto(Backbone.Events);
+});
+
+    </pre>
 </div>
 
                     </div>
