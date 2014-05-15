@@ -92,8 +92,10 @@ define('__bb-dock/base',['require','exports','module','dock','backbone'],functio
 
 /* jshint ignore:end */
 
-define('bb-dock',['require','exports','module','./__bb-dock/base'],function (require, exports, module) {
+define('bb-dock',['require','exports','module','backbone','./__bb-dock/base'],function (require, exports, module) {
 	
+
+	var Backbone = require('backbone');
 
 	var bbDock = require('./__bb-dock/base');
 
@@ -106,6 +108,22 @@ define('bb-dock',['require','exports','module','./__bb-dock/base'],function (req
 	 * @type {[type]}
 	 */
 	var modelDock = exports.model = bbDock.extend({
+
+		initialize: function initialize(options) {
+			bbDock.prototype.initialize.call(this, options);
+
+			this.initializeModelDock(options);
+		},
+
+		initializeModelDock: function initializeModelDock(options) {
+
+			if (!this.model) {
+				this.attach(new Backbone.Model());
+			}
+		},
+
+
+
 		attachmentAttribute: 'model',
 	});
 
@@ -135,6 +153,21 @@ define('bb-dock',['require','exports','module','./__bb-dock/base'],function (req
 
 	// collection dock
 	var collectionDock = exports.collection = bbDock.extend({
+
+		initialize: function initialize(options) {
+			bbDock.prototype.initialize.call(this, options);
+
+			this.initializeCollectionDock(options);
+		},
+
+		initializeCollectionDock: function initializeCollectionDock(options) {
+
+			if (!this.collection) {
+				this.attach(new Backbone.Collection());
+			}
+		},
+
+
 		attachmentAttribute: 'collection',
 	});
 		// the proxy methods for collection

@@ -129,7 +129,7 @@
         },
         {
             "file": "src/index.js",
-            "line": 20,
+            "line": 22,
             "description": "Dock for models.\nProxies all API explicit methods and properties.\n\nmodelDock",
             "type": "{[type]}",
             "class": "",
@@ -144,7 +144,7 @@
         },
         {
             "message": "Missing item type\nDock for models.\nProxies all API explicit methods and properties.\n\nmodelDock",
-            "line": " src/index.js:20"
+            "line": " src/index.js:22"
         }
     ]
 }

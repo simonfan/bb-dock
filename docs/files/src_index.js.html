@@ -104,6 +104,8 @@ if (typeof define !== &#x27;function&#x27;) { var define = require(&#x27;amdefin
 define(function (require, exports, module) {
 	&#x27;use strict&#x27;;
 
+	var Backbone = require(&#x27;backbone&#x27;);
+
 	var bbDock = require(&#x27;./__bb-dock/base&#x27;);
 
 
@@ -115,6 +117,22 @@ define(function (require, exports, module) {
 	 * @type {[type]}
 	 */
 	var modelDock = exports.model = bbDock.extend({
+
+		initialize: function initialize(options) {
+			bbDock.prototype.initialize.call(this, options);
+
+			this.initializeModelDock(options);
+		},
+
+		initializeModelDock: function initializeModelDock(options) {
+
+			if (!this.model) {
+				this.attach(new Backbone.Model());
+			}
+		},
+
+
+
 		attachmentAttribute: &#x27;model&#x27;,
 	});
 
@@ -144,6 +162,21 @@ define(function (require, exports, module) {
 
 	// collection dock
 	var collectionDock = exports.collection = bbDock.extend({
+
+		initialize: function initialize(options) {
+			bbDock.prototype.initialize.call(this, options);
+
+			this.initializeCollectionDock(options);
+		},
+
+		initializeCollectionDock: function initializeCollectionDock(options) {
+
+			if (!this.collection) {
+				this.attach(new Backbone.Collection());
+			}
+		},
+
+
 		attachmentAttribute: &#x27;collection&#x27;,
 	});
 		// the proxy methods for collection
