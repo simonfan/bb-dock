@@ -9,9 +9,8 @@
   },
   "dependencies": {
     "amdefine": ">=0.1.0",
-    "lodash": "~2.4.1",
-    "subject": "~0.4.3",
-    "backbone": "~1.1.2"
+    "backbone": "~1.1.2",
+    "dock": "~0.1.4"
   },
   "devDependencies": {
     "grunt": "~0.4.2",

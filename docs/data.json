@@ -4,11 +4,18 @@
         "version": "0.0.0"
     },
     "files": {
-        "src/index.js": {
-            "name": "src/index.js",
+        "src/__bb-dock/base.js": {
+            "name": "src/__bb-dock/base.js",
             "modules": {
                 "$el.dock": 1
             },
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/index.js": {
+            "name": "src/index.js",
+            "modules": {},
             "classes": {},
             "fors": {},
             "namespaces": {}
@@ -33,67 +40,98 @@
             "namespaces": {},
             "module": "bb-dock",
             "namespace": "",
-            "file": "src/index.js",
+            "file": "src/__bb-dock/base.js",
             "line": 5
         }
     },
     "classes": {},
     "classitems": [
         {
-            "file": "src/index.js",
-            "line": 21,
-            "description": "The constructor for the dock object.",
-            "itemtype": "method",
-            "name": "dock",
-            "is_constructor": 1,
+            "file": "src/__bb-dock/base.js",
+            "line": 23,
+            "description": "The base dock constructor for backbone data stuff.\nDeals with attaching and detaching.",
             "params": [
+                {
+                    "name": "model",
+                    "description": "[description]",
+                    "type": "[type]"
+                },
+                {
+                    "name": "options)",
+                    "description": "{\t\t\t\t\t\tthis.listenTo(model, 'all',             this.trigger);\t\t\t\t\t\tif (!options                         ||              !options.silent) {\t\t\t\tthis.trigger('attach', model,           options);\t\t\t}\t\t}           [description]",
+                    "type": "[type]"
+                },
+                {
+                    "name": "afterDetach:",
+                    "description": "function                     afterDetach(model, options)               {\t\t\t\t\t\tthis.stopListening(model, 'all');\t\t\t\t\t\tif (!options        ||                           !options.silent) {\t\t\t\tthis.trigger('detach', model,        options [description]",
+                    "type": "[type]"
+                }
+            ],
+            "return": {
+                "description": "[description]",
+                "type": "[type]"
+            },
+            "class": "",
+            "module": "bb-dock",
+            "submodule": "$el.dock"
+        },
+        {
+            "file": "src/__bb-dock/base.js",
+            "line": 34,
+            "description": "Immediately after the item (model/collection) is attached,\nlet dock listen to the 'all' event\nand trigger events.",
+            "itemtype": "method",
+            "name": "afterAttach",
+            "params": [
+                {
+                    "name": "item",
+                    "description": "[description]",
+                    "type": "[type]"
+                },
                 {
                     "name": "options",
-                    "description": ""
-                },
-                {
-                    "name": "attachment",
-                    "description": "\n        Optionally provide a attachment that will initially fill the $el.",
-                    "type": "Object",
-                    "optional": true
+                    "description": "[description]",
+                    "type": "[type]"
                 }
             ],
+            "return": {
+                "description": "[description]",
+                "type": "[type]"
+            },
             "class": "",
             "module": "bb-dock",
             "submodule": "$el.dock"
         },
         {
-            "file": "src/index.js",
-            "line": 42,
+            "file": "src/__bb-dock/base.js",
+            "line": 56,
+            "description": "Immediately after the item (model/collection) is detached,\nstop listening to the 'all' event.",
             "itemtype": "method",
-            "name": "invoke",
+            "name": "afterDetach",
             "params": [
                 {
-                    "name": "method",
-                    "description": ""
+                    "name": "item",
+                    "description": "[description]",
+                    "type": "[type]"
                 },
                 {
-                    "name": "arguments",
-                    "description": "",
-                    "optional": true
+                    "name": "options",
+                    "description": "[description]",
+                    "type": "[type]"
                 }
             ],
+            "return": {
+                "description": "[description]",
+                "type": "[type]"
+            },
             "class": "",
             "module": "bb-dock",
             "submodule": "$el.dock"
         },
         {
             "file": "src/index.js",
-            "line": 72,
-            "class": "",
-            "module": "bb-dock",
-            "submodule": "$el.dock"
-        },
-        {
-            "file": "src/index.js",
-            "line": 93,
-            "itemtype": "method",
-            "name": "detach",
+            "line": 20,
+            "description": "Dock for models.\nProxies all API explicit methods and properties.\n\nmodelDock",
+            "type": "{[type]}",
             "class": "",
             "module": "bb-dock",
             "submodule": "$el.dock"
@@ -101,12 +139,12 @@
     ],
     "warnings": [
         {
-            "message": "replacing incorrect tag: params with param",
-            "line": " src/index.js:42"
+            "message": "Missing item type\nThe base dock constructor for backbone data stuff.\nDeals with attaching and detaching.",
+            "line": " src/__bb-dock/base.js:23"
         },
         {
-            "message": "Missing item type",
-            "line": " src/index.js:72"
+            "message": "Missing item type\nDock for models.\nProxies all API explicit methods and properties.\n\nmodelDock",
+            "line": " src/index.js:20"
         }
     ]
 }

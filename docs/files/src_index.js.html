@@ -104,169 +104,64 @@ if (typeof define !== &#x27;function&#x27;) { var define = require(&#x27;amdefin
 define(function (require, exports, module) {
 	&#x27;use strict&#x27;;
 
-	var _ = require(&#x27;lodash&#x27;),
-		subject = require(&#x27;subject&#x27;),
-		Backbone = require(&#x27;backbone&#x27;);
+	var bbDock = require(&#x27;./__bb-dock/base&#x27;);
+
 
 	/**
-	 * The constructor for the dock object.
+	 * Dock for models.
+	 * Proxies all API explicit methods and properties.
 	 *
-	 * @method dock
-	 * @constructor
-	 * @param options
-	 *     @param [attachment] {Object}
-	 *         Optionally provide a attachment that will initially fill the $el.
+	 * modelDock
+	 * @type {[type]}
 	 */
-	var dock = module.exports = subject({
-		initialize: function initialize(options) {
-			this.initializeBbDock(options);
-		},
-
-		initializeBbDock: function initializeBbDock(options) {
-
-			if (options &amp;&amp; options.attach) {
-				this.attach(options.attach);
-			}
-		},
-
-		/**
-		 *
-		 *
-		 *
-		 * @method invoke
-		 * @param method
-		 * @params [arguments]
-		 */
-		invoke: function invoke(method) {
-			if (this.attachment) {
-
-				var args = Array.prototype.slice.call(arguments, 1);
-
-				return this.attachment[method].apply(this.attachment, args);
-
-			} else {
-				throw new Error(&#x27;No attachment attached to dock. Unable to invoke &#x27; + method);
-			}
-		},
-
-
-		retrieve: function retrieve(property) {
-			if (this.attachment) {
-
-				return this.attachment[property];
-
-			} else {
-				throw new Error(&#x27;No attachment attached to dock. Unable to retrieve &#x27; + property);
-			}
-		},
-		/**
-		 *
-		 *
-		 *
-		 */
-		attach: function attach(attachment, options) {
-
-			this.detach();
-
-			this.attachment = attachment;
-
-			this.listenTo(attachment, &#x27;all&#x27;, this.trigger);
-
-			// trigger attach event.
-			if (!options || !options.silent) {
-				this.trigger(&#x27;attach&#x27;, attachment);
-			}
-
-			return this;
-		},
-
-		/**
-		 *
-		 *
-		 * @method detach
-		 */
-		detach: function detach(options) {
-			if (this.attachment) {
-
-				var attachment = this.attachment;
-
-				// Stop listening to all events from the attachment.
-				this.stopListening(attachment);
-
-				// unset this.attachment
-				delete this.attachment;
-
-				// trigger detach event
-				if (!options || !options.silent) {
-					this.trigger(&#x27;detach&#x27;, attachment);
-				}
-			}
-
-			return this;
-		},
+	var modelDock = exports.model = bbDock.extend({
+		attachmentAttribute: &#x27;model&#x27;,
 	});
 
+	// proxies
 
-	// static methods
-	dock.extendProxyMethods = function extendProxyMethods(methodNames) {
+	// proxy methods
+	modelDock.defineProxies([
+		&#x27;get&#x27;, &#x27;set&#x27;, &#x27;escape&#x27;, &#x27;has&#x27;, &#x27;unset&#x27;, &#x27;clear&#x27;,
+		&#x27;toJSON&#x27;,
+		&#x27;sync&#x27;, &#x27;fetch&#x27;, &#x27;save&#x27;, &#x27;destroy&#x27;,
+		&#x27;keys&#x27;, &#x27;values&#x27;, &#x27;pairs&#x27;, &#x27;invert&#x27;, &#x27;pick&#x27;, &#x27;omit&#x27;,
+		&#x27;validate&#x27;, &#x27;isValid&#x27;,
+		&#x27;url&#x27;,
+		&#x27;parse&#x27;,
+		&#x27;clone&#x27;, &#x27;isNew&#x27;,
+		&#x27;hasChanged&#x27;, &#x27;changedAttributes&#x27;,
+		&#x27;previous&#x27;, &#x27;previousAttributes&#x27;
+	]);
 
-
-		// object to hold the methods
-		var methods = {};
-
-		_.each(methodNames, function (method) {
-			methods[method] = _.partial(dock.prototype.invoke, method);
-		});
-
-		// create an extended dock
-		return this.extend(methods);
-	};
-
-
-	// let dock inherit from Backbone.Events
-	dock.proto(Backbone.Events);
-
-
-	// model dock
-	var modelDock = dock
-		// the proxy methods for model
-		.extendProxyMethods([
-			&#x27;get&#x27;, &#x27;set&#x27;, &#x27;escape&#x27;, &#x27;has&#x27;, &#x27;unset&#x27;, &#x27;clear&#x27;,
-			&#x27;toJSON&#x27;,
-			&#x27;sync&#x27;, &#x27;fetch&#x27;, &#x27;save&#x27;, &#x27;destroy&#x27;,
-			&#x27;validate&#x27;, &#x27;isValid&#x27;,
-			&#x27;url&#x27;,
-			&#x27;parse&#x27;,
-			&#x27;clone&#x27;, &#x27;isNew&#x27;,
-			&#x27;hasChanged&#x27;, &#x27;changedAttributes&#x27;,
-			&#x27;previous&#x27;, &#x27;previousAttributes&#x27;,
-
-			// underscore methods
-			&#x27;keys&#x27;, &#x27;values&#x27;, &#x27;pairs&#x27;, &#x27;invert&#x27;, &#x27;pick&#x27;, &#x27;omit&#x27;,
-		]);
-
-	dock.model = modelDock;
+	// proxy properties
+	modelDock.defineProxies([
+		&#x27;id&#x27;, &#x27;idAttribute&#x27;, &#x27;cid&#x27;, &#x27;attributes&#x27;,
+		&#x27;changed&#x27;, &#x27;defaults&#x27;,
+		&#x27;validationError&#x27;,
+		&#x27;urlRoot&#x27;,
+	]);
 
 	// collection dock
-	var collectionDock = dock
+	var collectionDock = exports.collection = bbDock.extend({
+		attachmentAttribute: &#x27;collection&#x27;,
+	});
 		// the proxy methods for collection
-		.extendProxyMethods([
-			&#x27;toJSON&#x27;, &#x27;sync&#x27;,
-			&#x27;add&#x27;, &#x27;remove&#x27;, &#x27;reset&#x27;, &#x27;set&#x27;,
-			&#x27;get&#x27;, &#x27;at&#x27;, &#x27;push&#x27;, &#x27;pop&#x27;, &#x27;unshift&#x27;, &#x27;shift&#x27;,
-			&#x27;slice&#x27;, &#x27;sort&#x27;, &#x27;pluck&#x27;, &#x27;where&#x27;, &#x27;findWhere&#x27;,
-			&#x27;parse&#x27;, &#x27;clone&#x27;, &#x27;fetch&#x27;, &#x27;create&#x27;,
+	collectionDock.defineProxies([
+		&#x27;toJSON&#x27;, &#x27;sync&#x27;,
+		&#x27;add&#x27;, &#x27;remove&#x27;, &#x27;reset&#x27;, &#x27;set&#x27;,
+		&#x27;get&#x27;, &#x27;at&#x27;, &#x27;push&#x27;, &#x27;pop&#x27;, &#x27;unshift&#x27;, &#x27;shift&#x27;,
+		&#x27;slice&#x27;, &#x27;sort&#x27;, &#x27;pluck&#x27;, &#x27;where&#x27;, &#x27;findWhere&#x27;,
+		&#x27;parse&#x27;, &#x27;clone&#x27;, &#x27;fetch&#x27;, &#x27;create&#x27;,
 
-			// underscore methods
-			&#x27;forEach&#x27;, &#x27;each&#x27;, &#x27;map&#x27;, &#x27;collect&#x27;, &#x27;reduce&#x27;, &#x27;foldl&#x27;,
-			&#x27;inject&#x27;, &#x27;reduceRight&#x27;, &#x27;foldr&#x27;, &#x27;find&#x27;, &#x27;detect&#x27;, &#x27;filter&#x27;, &#x27;select&#x27;,
-			&#x27;reject&#x27;, &#x27;every&#x27;, &#x27;all&#x27;, &#x27;some&#x27;, &#x27;any&#x27;, &#x27;include&#x27;, &#x27;contains&#x27;, &#x27;invoke&#x27;,
-			&#x27;max&#x27;, &#x27;min&#x27;, &#x27;toArray&#x27;, &#x27;size&#x27;, &#x27;first&#x27;, &#x27;head&#x27;, &#x27;take&#x27;, &#x27;initial&#x27;, &#x27;rest&#x27;,
-			&#x27;tail&#x27;, &#x27;drop&#x27;, &#x27;last&#x27;, &#x27;without&#x27;, &#x27;difference&#x27;, &#x27;indexOf&#x27;, &#x27;shuffle&#x27;,
-			&#x27;lastIndexOf&#x27;, &#x27;isEmpty&#x27;, &#x27;chain&#x27;, &#x27;sample&#x27;, &#x27;partition&#x27;
-		]);
-
-	dock.collection = collectionDock;
+		// underscore methods
+		&#x27;forEach&#x27;, &#x27;each&#x27;, &#x27;map&#x27;, &#x27;collect&#x27;, &#x27;reduce&#x27;, &#x27;foldl&#x27;,
+		&#x27;inject&#x27;, &#x27;reduceRight&#x27;, &#x27;foldr&#x27;, &#x27;find&#x27;, &#x27;detect&#x27;, &#x27;filter&#x27;, &#x27;select&#x27;,
+		&#x27;reject&#x27;, &#x27;every&#x27;, &#x27;all&#x27;, &#x27;some&#x27;, &#x27;any&#x27;, &#x27;include&#x27;, &#x27;contains&#x27;, &#x27;invoke&#x27;,
+		&#x27;max&#x27;, &#x27;min&#x27;, &#x27;toArray&#x27;, &#x27;size&#x27;, &#x27;first&#x27;, &#x27;head&#x27;, &#x27;take&#x27;, &#x27;initial&#x27;, &#x27;rest&#x27;,
+		&#x27;tail&#x27;, &#x27;drop&#x27;, &#x27;last&#x27;, &#x27;without&#x27;, &#x27;difference&#x27;, &#x27;indexOf&#x27;, &#x27;shuffle&#x27;,
+		&#x27;lastIndexOf&#x27;, &#x27;isEmpty&#x27;, &#x27;chain&#x27;, &#x27;sample&#x27;, &#x27;partition&#x27;
+	]);
 });
 
     </pre>
