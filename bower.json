@@ -2,7 +2,7 @@
   "name": "bb-dock",
   "main": "built/bb-dock.js",
   "version": "0.7.7",
-  "description": "Some module...",
+  "description": "Dock for backbone objects",
   "dependencies": {
     "backbone": "~1.1.2",
     "dock": "~0.1.4"

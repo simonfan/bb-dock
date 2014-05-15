@@ -2,7 +2,7 @@
   "name": "bb-dock",
   "main": "./src",
   "version": "0.7.7",
-  "description": "Some module...",
+  "description": "Dock for backbone",
   "repository": {
     "type": "git",
     "url": "https://github.com/simonfan/bb-dock.git"
