@@ -1,7 +1,7 @@
 {
   "name": "bb-dock",
   "main": "./src",
-  "version": "0.7.8",
+  "version": "0.7.9",
   "description": "Dock for backbone",
   "repository": {
     "type": "git",

@@ -47,7 +47,14 @@ define(function (require, exports, module) {
 			this.listenTo(item, 'all', this.trigger);
 
 			// trigger attach event.
+			// trigger change event: A
+			// ATTENTION - none of these events is triggered on the attached item
+			//             itself, but only on the dock object.
+			//             That means that this 'change' event won't trigger
+			//             any listeners listening to the model/collection.
+			//             (which is awesome :)
 			if (!options || !options.silent) {
+				this.trigger('change', item, options);
 				this.trigger('attach', item, options);
 			}
 
@@ -69,6 +76,7 @@ define(function (require, exports, module) {
 
 			// trigger detach event.
 			if (!options || !options.silent) {
+				this.trigger('change', item, options);
 				this.trigger('detach', item, options);
 			}
 
