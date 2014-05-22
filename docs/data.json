@@ -103,7 +103,7 @@
         },
         {
             "file": "src/__bb-dock/base.js",
-            "line": 63,
+            "line": 67,
             "description": "Immediately after the item (model/collection) is detached,\nstop listening to the 'all' event.",
             "itemtype": "method",
             "name": "afterDetach",

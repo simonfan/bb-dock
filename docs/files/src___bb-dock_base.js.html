@@ -143,12 +143,16 @@ define(function (require, exports, module) {
 			//             That means that this &#x27;change&#x27; event won&#x27;t trigger
 			//             any listeners listening to the model/collection.
 			//             (which is awesome :)
+			//
+			// TODO: implement attribute-level change events
 			if (!options || !options.silent) {
 				this.trigger(&#x27;change&#x27;, item, options);
 				this.trigger(&#x27;attach&#x27;, item, options);
 			}
 
 		},
+
+
 
 		/**
 		 * Immediately after the item (model/collection) is detached,
@@ -166,7 +170,6 @@ define(function (require, exports, module) {
 
 			// trigger detach event.
 			if (!options || !options.silent) {
-				this.trigger(&#x27;change&#x27;, item, options);
 				this.trigger(&#x27;detach&#x27;, item, options);
 			}
 
