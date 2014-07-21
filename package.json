@@ -1,7 +1,7 @@
 {
   "name": "bb-dock",
   "main": "./src",
-  "version": "0.7.9",
+  "version": "0.7.11",
   "description": "Dock for backbone",
   "repository": {
     "type": "git",
@@ -10,7 +10,8 @@
   "dependencies": {
     "amdefine": ">=0.1.0",
     "backbone": "~1.1.2",
-    "dock": "~0.1.4"
+    "dock": "~0.1.4",
+    "lodash": "^2.4.1"
   },
   "devDependencies": {
     "grunt": "~0.4.2",

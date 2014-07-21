@@ -14,7 +14,8 @@ if (typeof define !== 'function') { var define = require('amdefine')(module) }
 define(function (require, exports, module) {
 	'use strict';
 
-	var Backbone = require('backbone');
+	var Backbone = require('backbone'),
+		_        = require('lodash');
 
 	var bbDock = require('./__bb-dock/base');
 
@@ -39,6 +40,9 @@ define(function (require, exports, module) {
 			if (!this.model) {
 				this.attach(new Backbone.Model());
 			}
+
+			// trigger change event on attach.
+			this.on('attach', _.partial(this.trigger, 'change', this, options), this);
 		},
 
 
@@ -84,6 +88,9 @@ define(function (require, exports, module) {
 			if (!this.collection) {
 				this.attach(new Backbone.Collection());
 			}
+
+			// trigger reset event on attach
+			this.on('attach', _.partial(this.trigger, 'reset', this, options), this);
 		},
 
 

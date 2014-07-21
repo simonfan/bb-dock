@@ -1,11 +1,12 @@
 {
   "name": "bb-dock",
   "main": "built/bb-dock.js",
-  "version": "0.7.10",
+  "version": "0.7.11",
   "description": "Dock for backbone objects",
   "dependencies": {
     "backbone": "~1.1.2",
-    "dock": "~0.1.4"
+    "dock": "~0.1.4",
+    "lodash": "~2.4.1"
   },
   "devDependencies": {
     "requirejs": "*",

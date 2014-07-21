@@ -56,7 +56,6 @@ define(function (require, exports, module) {
 			//
 			// TODO: implement attribute-level change events
 			if (!options || !options.silent) {
-				this.trigger('change', item, options);
 				this.trigger('attach', item, options);
 			}
 

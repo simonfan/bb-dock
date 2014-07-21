@@ -56,7 +56,6 @@ define('__bb-dock/base',['require','exports','module','dock','backbone'],functio
 			//
 			// TODO: implement attribute-level change events
 			if (!options || !options.silent) {
-				this.trigger('change', item, options);
 				this.trigger('attach', item, options);
 			}
 
@@ -103,10 +102,11 @@ define('__bb-dock/base',['require','exports','module','dock','backbone'],functio
 
 /* jshint ignore:end */
 
-define('bb-dock',['require','exports','module','backbone','./__bb-dock/base'],function (require, exports, module) {
+define('bb-dock',['require','exports','module','backbone','lodash','./__bb-dock/base'],function (require, exports, module) {
 	
 
-	var Backbone = require('backbone');
+	var Backbone = require('backbone'),
+		_        = require('lodash');
 
 	var bbDock = require('./__bb-dock/base');
 
@@ -131,6 +131,9 @@ define('bb-dock',['require','exports','module','backbone','./__bb-dock/base'],fu
 			if (!this.model) {
 				this.attach(new Backbone.Model());
 			}
+
+			// trigger change event on attach.
+			this.on('attach', _.partial(this.trigger, 'change', this, options), this);
 		},
 
 
@@ -176,6 +179,9 @@ define('bb-dock',['require','exports','module','backbone','./__bb-dock/base'],fu
 			if (!this.collection) {
 				this.attach(new Backbone.Collection());
 			}
+
+			// trigger reset event on attach
+			this.on('attach', _.partial(this.trigger, 'reset', this, options), this);
 		},
 
 

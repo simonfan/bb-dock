@@ -103,7 +103,7 @@
         },
         {
             "file": "src/__bb-dock/base.js",
-            "line": 67,
+            "line": 66,
             "description": "Immediately after the item (model/collection) is detached,\nstop listening to the 'all' event.",
             "itemtype": "method",
             "name": "afterDetach",
@@ -129,7 +129,7 @@
         },
         {
             "file": "src/index.js",
-            "line": 22,
+            "line": 23,
             "description": "Dock for models.\nProxies all API explicit methods and properties.\n\nmodelDock",
             "type": "{[type]}",
             "class": "",
@@ -144,7 +144,7 @@
         },
         {
             "message": "Missing item type\nDock for models.\nProxies all API explicit methods and properties.\n\nmodelDock",
-            "line": " src/index.js:22"
+            "line": " src/index.js:23"
         }
     ]
 }
